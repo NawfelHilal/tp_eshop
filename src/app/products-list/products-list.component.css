@@ -1,0 +1,28 @@
+.product-container {
+    margin-left: 100px;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .divBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .searchdiv {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .search{
+      width: 300px;
+      height: 25px;
+      border-radius: 30px;
+      text-align: center;
+  }

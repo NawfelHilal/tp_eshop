@@ -1,14 +1,26 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-
+import { Component, LOCALE_ID, OnInit } from "@angular/core";
+import { registerLocaleData } from "@angular/common";
+import localeFr from "@angular/common/locales/fr";
+registerLocaleData(localeFr);
+import { HeaderComponent } from "./header/header.component";
+import { FooterComponent } from "./footer/footer.component";
+import { RouterOutlet } from "@angular/router";
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: "fr-FR",
+    },
+  ],
+  styleUrls: ["./app.component.css"],
+  template: `
+    <app-header />
+    <router-outlet></router-outlet>
+    <app-footer />
+  `,
+  styles: [],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
 })
-export class AppComponent {
-  title = 'tp_eshop';
-}
+export class AppComponent {}
