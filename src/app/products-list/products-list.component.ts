@@ -1,14 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { ProductCardComponent } from "../product-card/product-card.component";
-import { AppPipesModule } from "../pipes/app-pipes.module";
-import { Product } from "../models/product.model";
-import { ProductsService } from "../services/products.service";
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
-import { MatButtonModule } from "@angular/material/button";
+import { Component, OnInit } from '@angular/core';
+import { ProductCardComponent } from '../product-card/product-card.component';
+import { AppPipesModule } from '../pipes/app-pipes.module';
+import { Product } from '../models/product.model';
+import { ProductsService } from '../services/products.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { Route, Router } from '@angular/router';
 
 @Component({
-  selector: "app-products-list",
+  selector: 'app-products-list',
   standalone: true,
   template: `
     <div class="searchdiv">
@@ -37,10 +38,11 @@ import { MatButtonModule } from "@angular/material/button";
             | sortByName : nameSort
         "
         [myProduct]="product"
+        (click)="navigateToProduct(product.id)"
       />
     </div>
   `,
-  styleUrls: ["./products-list.component.css"],
+  styleUrls: ['./products-list.component.css'],
   imports: [
     ProductCardComponent,
     AppPipesModule,
@@ -50,17 +52,20 @@ import { MatButtonModule } from "@angular/material/button";
   ],
 })
 export class ProductsListComponent implements OnInit {
-  searchTerm: string = "";
+  searchTerm: string = '';
   products!: Product[];
-  sortTri: string = "asc";
-  search: string = "";
-  nameSort: string = "asc";
+  sortTri: string = 'asc';
+  search: string = '';
+  nameSort: string = 'asc';
 
-  constructor(private productService: ProductsService) {}
+  constructor(
+    private productService: ProductsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const favoriteProducts = JSON.parse(
-      localStorage.getItem("favoriteProducts") || "[]"
+      localStorage.getItem('favoriteProducts') || '[]'
     );
 
     this.products = this.productService.products.map((product) => {
@@ -74,10 +79,14 @@ export class ProductsListComponent implements OnInit {
   }
 
   toggleSorting() {
-    this.sortTri = this.sortTri === "asc" ? "desc" : "asc";
+    this.sortTri = this.sortTri === 'asc' ? 'desc' : 'asc';
   }
 
   nameSorting() {
-    this.nameSort = this.nameSort === "asc" ? "desc" : "asc";
+    this.nameSort = this.nameSort === 'asc' ? 'desc' : 'asc';
+  }
+
+  navigateToProduct(productId: number) {
+    this.router.navigate(['/product', productId]);
   }
 }

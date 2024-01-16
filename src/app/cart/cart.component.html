@@ -1,1 +1,11 @@
-<p>cart works!</p>
+<div class="cart-container" *ngFor="let item of cartItems">
+    <div class="cart-item" *ngIf="getProduct(item.id) as product">
+      <div>
+        <h3 class="product-title">{{ product.marque }}</h3>
+        <h4>{{product.modele}}</h4>
+        <p class="product-description">{{ product.description }}</p>
+      </div>
+      <div class="product-quantity">Quantité : {{ item.quantity }}</div>
+    </div>
+  </div>
+  
