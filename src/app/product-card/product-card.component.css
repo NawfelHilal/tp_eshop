@@ -35,3 +35,8 @@
   .priceDate{
     margin-left: 20px;
   }
+  .mat-card {
+    height: 400px; /* Hauteur fixe pour toutes les cartes */
+    flex-basis: 300px; /* Largeur fixe pour toutes les cartes */
+  }
+  

@@ -11,6 +11,14 @@ import { RouterLink } from '@angular/router';
       <a routerLink="/" routerLinkActive="router-link-active">back to home </a>
     </mat-toolbar>
   `,
-  styles: ``,
+  styles: `
+  .footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 0px;
+  margin-top: 20px;
+}
+`,
 })
 export class FooterComponent {}

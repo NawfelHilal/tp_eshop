@@ -19,18 +19,33 @@ import { RouterLink } from '@angular/router';
   ],
   template: `
     <mat-toolbar color="primary">
-      <span>Auto Sale</span>
-      <ul>
-        <li>
-          <a routerLink="" routerLinkActive="router-link-active"> Accueil </a>
-        </li>
-
-        <li>
-          <a routerLink="cart" routerLinkActive="router-link-active"> Cart </a>
-        </li>
-      </ul>
+      <div class="toolbar-content">
+        <a routerLink="/">Auto Sale</a>
+        <div class="toolbar-links">
+          <div>
+            <a routerLink="" routerLinkActive="router-link-active"> Accueil </a>
+          </div>
+          <div>
+            <a routerLink="cart" routerLinkActive="router-link-active">
+              Panier
+            </a>
+          </div>
+        </div>
+      </div>
     </mat-toolbar>
   `,
-  styles: ``,
+  styles: `
+  .toolbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.toolbar-links {
+  display: flex;
+  gap: 20px;
+}
+`,
 })
 export class HeaderComponent {}

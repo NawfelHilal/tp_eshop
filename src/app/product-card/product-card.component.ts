@@ -45,15 +45,15 @@ import { HttpClientModule } from '@angular/common/http';
       </mat-card-content>
       <mat-card-actions>
         <div class="info-card">
-          <div *ngIf="myProduct.size">
+          <div *ngIf="myProduct.colors">
             <label for="size-select">Choisissez une couleur:</label>
             <select
               id="size-select"
               [(ngModel)]="selectedSize"
               (ngModelChange)="newPrice($event)"
             >
-              <option *ngFor="let size of myProduct.size" [value]="size">
-                {{ size }}
+              <option *ngFor="let color of myProduct.colors" [value]="color">
+                {{ color }}
               </option>
             </select>
           </div>
@@ -101,8 +101,8 @@ export class ProductCardComponent {
     localStorage.setItem('favoriteProducts', JSON.stringify(favoriteProducts));
   }
 
-  newPrice(size: string) {
-    switch (size) {
+  newPrice(color: string) {
+    switch (color) {
       case 'Noir':
         this.myProduct.prix = this.myProduct.prix + 2000;
         break;

@@ -5,11 +5,14 @@ import { CommonModule } from '@angular/common';
 import { CartItem } from '../models/cartitem.model';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, ContactFormComponent],
+  imports: [CommonModule, ContactFormComponent, MatButtonModule],
+  providers: [ProductsService, HttpClientModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -37,10 +40,11 @@ export class CartComponent {
 
   loadProductDetails() {
     this.cartItems.forEach((item) => {
-      const product = this.productsService.getOneProduct(item.id);
-      if (product) {
-        this.products.push(product);
-      }
+      this.productsService.getOneProduct(item.id).subscribe((product) => {
+        if (product) {
+          this.products.push(product);
+        }
+      });
     });
   }
   getProduct(id: number): Product | undefined {

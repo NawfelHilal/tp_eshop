@@ -10,6 +10,7 @@ export class Product {
   public date!: Date;
   public isFavorite: boolean = false;
   public size?: Array<string>;
+  public colors: string[] = [];
 
   constructor(
     id: number,
@@ -22,7 +23,7 @@ export class Product {
     btnValue: string,
     date: Date,
     isFavorite: boolean,
-    size?: Array<string>
+    colors: Array<string>
   ) {
     this.id = id;
     this.marque = marque;
@@ -34,6 +35,6 @@ export class Product {
     this.btnValue = btnValue;
     this.date = date;
     this.isFavorite = isFavorite;
-    this.size = size;
+    this.colors = colors;
   }
 }

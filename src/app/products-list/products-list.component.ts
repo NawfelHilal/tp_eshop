@@ -54,6 +54,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MatButtonModule,
   ],
+  providers: [ProductsService, HttpClientModule],
 })
 export class ProductsListComponent implements OnInit {
   searchTerm: string = '';
@@ -73,7 +74,10 @@ export class ProductsListComponent implements OnInit {
       localStorage.getItem('favoriteProducts') || '[]'
     );
 
-    this.products = this.productService.getAllProducts();
+    this.productService.getAllProducts().subscribe((products) => {
+      this.products = products;
+      console.log(this.products);
+    });
   }
 
   toggleSorting() {

@@ -6,14 +6,14 @@
         <h4>{{product.modele}}</h4>
         <p class="product-description">{{ product.description }}</p>
       </div>
-      <button (click)="decreaseQuantity(item)">-</button>
+      <button  mat-raised-button color="primary" class="moins" (click)="decreaseQuantity(item)">-</button>
       <div class="product-quantity">Quantité : {{ item.quantity }}</div>
-      <button (click)="increaseQuantity(item)">+</button>
+      <button  mat-raised-button color="primary" class="plus" (click)="increaseQuantity(item)">+</button>
     </div>
   </div>
-  <button (click)="placeOrder()">Commander</button>
+  <button  mat-raised-button color="primary" (click)="placeOrder()">Commander</button>
   <div class="cart-total">
-    Prix total : {{ calculateTotalPrice() }} €
+    Prix total : {{ calculateTotalPrice()| currency : 'EUR' }}
   </div>
 </div>
 

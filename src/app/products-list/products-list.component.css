@@ -1,6 +1,7 @@
 .product-container {
     margin-left: 100px;
     margin-top: 20px;
+    margin-bottom: 100px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -25,4 +26,9 @@
       height: 25px;
       border-radius: 30px;
       text-align: center;
+  }
+
+  .listCard{
+    cursor: pointer;
+    width: 400px;
   }

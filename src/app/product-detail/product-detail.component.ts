@@ -3,16 +3,38 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
   template: `
-    <app-product-card [myProduct]="myProduct" [orientation]="orientation" />
-    <button (click)="addToCart(myProduct)">Add to Cart</button>
+    <div class="product">
+      <app-product-card [myProduct]="myProduct" [orientation]="orientation" />
+    </div>
+    <div class="btn">
+      <button mat-raised-button color="primary" (click)="addToCart(myProduct)">
+        Add to Cart
+      </button>
+    </div>
   `,
-  styles: ``,
-  imports: [ProductCardComponent],
+  styles: `
+  .product{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }`,
+  imports: [ProductCardComponent, MatButtonModule],
+  providers: [ProductsService, HttpClientModule],
 })
 export class ProductDetailComponent implements OnInit {
   myProduct!: Product;
@@ -40,7 +62,11 @@ export class ProductDetailComponent implements OnInit {
     this.id = productId;
 
     try {
-      this.myProduct = this.productService.getOneProduct(parseInt(this.id));
+      this.productService
+        .getOneProduct(parseInt(this.id))
+        .subscribe((product: Product) => {
+          this.myProduct = product;
+        });
     } catch (error) {
       console.error(error);
       this.router.navigate(['/404']);
@@ -66,6 +92,6 @@ export class ProductDetailComponent implements OnInit {
     }
 
     localStorage.setItem('panier', JSON.stringify(onP));
-    console.log('ajouter au panier');
+    alert('Produit ajouter au panier');
   }
 }
