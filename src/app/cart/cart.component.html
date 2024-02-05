@@ -1,11 +1,21 @@
-<div class="cart-container" *ngFor="let item of cartItems">
+<div class="cart-container">
+<div *ngFor="let item of cartItems">
     <div class="cart-item" *ngIf="getProduct(item.id) as product">
       <div>
         <h3 class="product-title">{{ product.marque }}</h3>
         <h4>{{product.modele}}</h4>
         <p class="product-description">{{ product.description }}</p>
       </div>
+      <button (click)="decreaseQuantity(item)">-</button>
       <div class="product-quantity">Quantité : {{ item.quantity }}</div>
+      <button (click)="increaseQuantity(item)">+</button>
     </div>
   </div>
+  <button (click)="placeOrder()">Commander</button>
+  <div class="cart-total">
+    Prix total : {{ calculateTotalPrice() }} €
+  </div>
+</div>
+
+<app-contact-form></app-contact-form>
   

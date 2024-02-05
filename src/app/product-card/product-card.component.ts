@@ -43,13 +43,13 @@ import { ProductsService } from '../services/products.service';
       </mat-card-content>
       <mat-card-actions>
         <div class="info-card">
-          <!-- <b>{{ myProduct.likes }}</b>
-          <button mat-button (click)="onLike()">
-            {{ myProduct.btnValue }}
-          </button> -->
           <div *ngIf="myProduct.size">
             <label for="size-select">Choisissez une couleur:</label>
-            <select id="size-select" [(ngModel)]="selectedSize">
+            <select
+              id="size-select"
+              [(ngModel)]="selectedSize"
+              (ngModelChange)="newPrice($event)"
+            >
               <option *ngFor="let size of myProduct.size" [value]="size">
                 {{ size }}
               </option>

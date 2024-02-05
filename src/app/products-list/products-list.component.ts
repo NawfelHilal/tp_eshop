@@ -68,9 +68,9 @@ export class ProductsListComponent implements OnInit {
       localStorage.getItem('favoriteProducts') || '[]'
     );
 
-    this.products = this.productService.products.map((product) => {
+    this.products = this.productService.products.map((product: Product) => {
       product.isFavorite = favoriteProducts.some(
-        (p: { modele: string }) => p.modele === product.modele
+        (p: Product) => p.modele === product.modele
       );
       return product;
     });
