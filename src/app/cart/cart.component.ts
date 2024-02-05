@@ -64,16 +64,14 @@ export class CartComponent {
       if (this.cartItems[index].quantity > 1) {
         this.cartItems[index].quantity--;
       } else {
-        // Supprimer l'élément du tableau si la quantité est 1 avant la décrémentation
         this.cartItems.splice(index, 1);
       }
-      this.updateCart(); // Mise à jour du localStorage
+      this.updateCart();
     }
   }
 
   updateCart() {
     localStorage.setItem('panier', JSON.stringify(this.cartItems));
-    // Vous pouvez également ajouter une logique ici pour recalculer le total du panier si nécessaire
   }
 
   calculateTotalPrice(): number {
@@ -88,9 +86,8 @@ export class CartComponent {
   }
 
   placeOrder() {
-    const orderId = Math.floor(Math.random() * 1000000); // Génère un ID simple
+    const orderId = Math.floor(Math.random() * 1000000);
     alert(`Votre numéro de commande est : ${orderId}`);
-    // Redirection avec le numéro de commande (ajustez selon votre route)
     this.router.navigate(['/order', orderId]);
   }
 }
