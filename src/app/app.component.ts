@@ -5,6 +5,7 @@ registerLocaleData(localeFr);
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterOutlet } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,6 +22,12 @@ import { RouterOutlet } from '@angular/router';
     <app-footer />
   `,
   styles: [],
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, CommonModule],
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    FooterComponent,
+    CommonModule,
+    HttpClientModule,
+  ],
 })
 export class AppComponent {}

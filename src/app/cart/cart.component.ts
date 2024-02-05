@@ -37,11 +37,10 @@ export class CartComponent {
 
   loadProductDetails() {
     this.cartItems.forEach((item) => {
-      this.productsService.getOneProduct(item.id).subscribe((product) => {
-        if (product) {
-          this.products.push(product);
-        }
-      });
+      const product = this.productsService.getOneProduct(item.id);
+      if (product) {
+        this.products.push(product);
+      }
     });
   }
   getProduct(id: number): Product | undefined {

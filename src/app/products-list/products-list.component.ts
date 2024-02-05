@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Route, Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-products-list',
@@ -29,17 +30,20 @@ import { Route, Router } from '@angular/router';
       </button>
     </div>
     <div class="product-container">
-      <app-product-card
-        class="listCard"
-        *ngFor="
-          let product of products
-            | sortByDate : sortTri
-            | search : searchTerm
-            | sortByName : nameSort
-        "
-        [myProduct]="product"
-        (click)="navigateToProduct(product.id)"
-      />
+      <ng-container *ngIf="products">
+        <app-product-card
+          *ngFor="
+            let product of products
+              | sortByDate : sortTri
+              | search : searchTerm
+              | sortByName : nameSort
+          "
+          class="listCard"
+          [myProduct]="product"
+          (click)="navigateToProduct(product.id)"
+        >
+        </app-product-card>
+      </ng-container>
     </div>
   `,
   styleUrls: ['./products-list.component.css'],
@@ -54,6 +58,7 @@ import { Route, Router } from '@angular/router';
 export class ProductsListComponent implements OnInit {
   searchTerm: string = '';
   products!: Product[];
+  favoriteProducts: any[] = [];
   sortTri: string = 'asc';
   search: string = '';
   nameSort: string = 'asc';
@@ -68,14 +73,7 @@ export class ProductsListComponent implements OnInit {
       localStorage.getItem('favoriteProducts') || '[]'
     );
 
-    this.products = this.productService.products.map((product: Product) => {
-      product.isFavorite = favoriteProducts.some(
-        (p: Product) => p.modele === product.modele
-      );
-      return product;
-    });
-
-    console.log(this.products);
+    this.products = this.productService.getAllProducts();
   }
 
   toggleSorting() {

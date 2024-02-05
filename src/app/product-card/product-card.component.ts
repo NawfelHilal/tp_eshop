@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { ProductsService } from '../services/products.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-card',
@@ -17,10 +18,11 @@ import { ProductsService } from '../services/products.service';
     CommonModule,
     MatCardModule,
     MatIconModule,
+    HttpClientModule,
   ],
   styleUrls: ['./product-card.component.css'],
   template: `
-    <mat-card class="example-card">
+    <mat-card *ngIf="myProduct" class="example-card">
       <mat-card-header class="header">
         <mat-card-title>{{ myProduct.marque | uppercase }}</mat-card-title>
         <mat-card-subtitle>{{
